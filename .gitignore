@@ -1,0 +1,24 @@
+# Builds and RPM artifacts
+.rpmbuild/
+build/
+cmake-build-*/
+redhat-linux-build/
+CMakeFiles/
+CMakeCache.txt
+*.rpm
+*.tar.gz
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Editors and local settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*~
+nightbrightness.json

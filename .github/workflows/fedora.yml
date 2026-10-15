@@ -1,0 +1,33 @@
+name: Fedora 44 RPM
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: fedora:44
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          dnf install -y rpm-build cmake ninja-build gcc-c++ extra-cmake-modules \
+            qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtpositioning-devel \
+            kf6-kcmutils-devel kf6-kcoreaddons-devel kf6-ki18n-devel \
+            python3 systemd-rpm-macros
+      - name: Unit tests
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 -m py_compile daemon/nightbrightness.py tools/probe.py
+          bash -n build-rpm.sh
+      - name: Build RPM
+        run: ./build-rpm.sh
+      - name: Upload RPM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: plasma-nightbrightness-fedora44
+          path: .rpmbuild/RPMS/x86_64/*.rpm

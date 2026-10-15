@@ -1,0 +1,14 @@
+{
+  "KPlugin": {
+    "Name": "Night Brightness",
+    "Name[fr]": "Luminosité nocturne",
+    "Description": "Schedule the display brightness during day and night",
+    "Description[fr]": "Programmer la luminosité de l'écran selon l'heure de la journée",
+    "Icon": "brightness-high",
+    "FormFactors": ["desktop"]
+  },
+  "X-KDE-Keywords": "brightness,night,day,schedule,screen",
+  "X-KDE-Keywords[fr]": "luminosité,nuit,jour,horaire,écran",
+  "X-KDE-System-Settings-Parent-Category": "display",
+  "X-KDE-Weight": 125
+}

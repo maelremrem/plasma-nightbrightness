@@ -16,12 +16,16 @@ int main(int argc, char **argv)
         QTextStream(stderr) << "GeoClue2 positioning plugin unavailable\n";
         return 2;
     }
+    bool positionDelivered = false;
     QObject::connect(source, &QGeoPositionInfoSource::positionUpdated, &app,
                      [&](const QGeoPositionInfo &info) {
+        if (positionDelivered) return;
         const auto c = info.coordinate();
         if (!c.isValid()) return;
-        QTextStream(stdout) << QString::number(c.latitude(), 'f', 6) << " "
-                            << QString::number(c.longitude(), 'f', 6) << "\n";
+        positionDelivered = true;
+        QTextStream output(stdout);
+        output << QString::number(c.latitude(), 'f', 6) << " "
+               << QString::number(c.longitude(), 'f', 6) << Qt::endl;
         app.exit(0);
     });
     QObject::connect(source, &QGeoPositionInfoSource::errorOccurred, &app,

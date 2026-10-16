@@ -1,5 +1,5 @@
 Name:           plasma-nightbrightness
-Version:        0.2.1
+Version:        0.2.2
 Release:        1%{?dist}
 Summary:        KDE Plasma 6 scheduled display brightness configuration
 License:        MIT
@@ -60,6 +60,8 @@ python3 -m py_compile daemon/nightbrightness.py
 %{_userunitdir}/nightbrightness.service
 
 %changelog
+* Fri Oct 16 2026 KDE Night Brightness Contributors - 0.2.2-1
+- Fix automatic location parsing when GeoClue2 returns repeated updates
 * Thu Oct 15 2026 KDE Night Brightness Contributors - 0.2.1-1
 - Add map selector, solar time preview and optional automatic location updates
 

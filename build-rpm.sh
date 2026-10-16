@@ -2,7 +2,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NAME=plasma-nightbrightness
-VERSION=0.2.1
+VERSION=0.2.2
 TOPDIR="$ROOT/.rpmbuild"
 if ! command -v dnf >/dev/null 2>&1; then
   echo 'Run this builder on Fedora Linux.' >&2

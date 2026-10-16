@@ -226,6 +226,25 @@ def target_percentage(config, now, bus):
     return (1 - fraction) * config["day_brightness"] + fraction * config["night_brightness"]
 
 
+def parse_geolocation_output(output):
+    """Read the latest valid position if GeoClue emits multiple updates."""
+    positions = []
+    for line in output.splitlines():
+        fields = line.split()
+        if len(fields) != 2:
+            continue
+        try:
+            latitude, longitude = map(float, fields)
+        except ValueError:
+            continue
+        if (math.isfinite(latitude) and math.isfinite(longitude)
+                and -90 <= latitude <= 90 and -180 <= longitude <= 180):
+            positions.append((latitude, longitude))
+    if not positions:
+        raise ValueError("No valid latitude/longitude pair in geolocation output")
+    return positions[-1]
+
+
 class LocationUpdater:
     """Opt-in refresh; location stays on device, no network API required."""
     def __init__(self):
@@ -246,10 +265,7 @@ class LocationUpdater:
         try:
             result = subprocess.run([helper], capture_output=True, text=True,
                                     timeout=25, check=True)
-            latitude, longitude = map(float, result.stdout.strip().split())
-            if not (math.isfinite(latitude) and math.isfinite(longitude)
-                    and -90 <= latitude <= 90 and -180 <= longitude <= 180):
-                raise ValueError("Invalid coordinates")
+            latitude, longitude = parse_geolocation_output(result.stdout)
             # Re-read configuration to avoid overriding a user change during lookup.
             with CONFIG.open(encoding="utf-8") as file:
                 raw = json.load(file)

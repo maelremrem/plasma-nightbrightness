@@ -4,7 +4,7 @@
 
 Plasma Night Brightness changes your monitor's **hardware brightness** based on a day/night schedule through Plasma's own screen brightness D-Bus interface. It is independent of KDE's built-in **Night Light** (color temperature) feature.
 
-> **Beta — 0.2.1:** Tested by an early user on Fedora 44 / KDE Plasma 6 with a Samsung monitor exposing `display0`. This is a **community project**, not an official KDE or Fedora package. Other displays, distributions and session setups may behave differently.
+> **Beta — 0.2.2:** Previously tested at 0.2.1 by an early user on Fedora 44 / KDE Plasma 6 with a Samsung monitor exposing `display0`. This is a **community project**, not an official KDE or Fedora package. Other displays, distributions and session setups may behave differently.
 
 ## Features
 
@@ -41,7 +41,7 @@ Clone this repository, then:
 
 ```bash
 ./build-rpm.sh --install-deps
-sudo dnf install ./.rpmbuild/RPMS/x86_64/plasma-nightbrightness-0.2.1-1.fc44.x86_64.rpm
+sudo dnf install ./.rpmbuild/RPMS/x86_64/plasma-nightbrightness-0.2.2-1.fc44.x86_64.rpm
 systemctl --user daemon-reload
 systemctl --user enable --now nightbrightness.service
 kcmshell6 kcm_nightbrightness

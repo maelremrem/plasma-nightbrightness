@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] — 2026-10-16 (beta)
+
+- Prevent repeated GeoClue2 position signals from producing malformed coordinate output.
+- Accept repeated valid position lines and save the newest valid pair.
+- Add regression tests for GeoClue2 duplicates and invalid position output.
+
 ## [0.2.1] — 2026-10-15 (beta)
 
 - Interactive map to choose coordinates for sunrise/sunset scheduling
